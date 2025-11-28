@@ -16,6 +16,9 @@
     "@mysten/sui.js": "^0.54.1",
     "@noble/ed25519": "^3.0.0",
     "@noble/hashes": "^2.0.1",
+    "@onelabs/bcs": "^1.6.0",
+    "@onelabs/sui": "^1.26.2",
+    "@onelabs/wallet": "^1.0.1",
     "@scure/bip32": "^2.0.1",
     "@scure/bip39": "^2.0.1",
     "@solana/web3.js": "^1.98.2",
@@ -23,6 +26,8 @@
     "base58": "^2.0.1",
     "bs58": "^6.0.0",
     "buffer": "^6.0.3",
+    "lodash": "^4.17.21",
+    "node-rsa": "^1.1.1",
     "three-mesh-bvh": "^0.9.1"
   }
 }
