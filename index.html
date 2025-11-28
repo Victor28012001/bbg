@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <!-- <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    /> -->
+    <meta name="viewport"
+    content="width=device-width; initial-scale=1; maximum-scale=1.0; viewport-fit=cover; user-scalable=no">
+    <meta name="theme-color" content="#000000" />
+    <meta
+      name="description"
+      content="Three.js FPS game with Solana integration"
+    />
+
+    <title>Bring Back Gladys</title>
+    <link rel="manifest" href="/manifest.json" />
+    <link rel="icon" href="/assets/images/icon-192x192.png" />
+
+    <!-- iOS specific meta tags -->
+     <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta
+      name="apple-mobile-web-app-status-bar-style"
+      content="black-translucent"
+    />
+    <meta name="apple-mobile-web-app-title" content="Bring Back Gladys" />
+    <link rel="apple-touch-icon" href="/assets/images/apple-touch-icon.png" />
+    <link rel="icon" href="/assets/images/icon-192x192.png" sizes="192x192" />
+    <link rel="icon" href="/assets/images/icon-512x512.png" sizes="512x512" />
+
+    <!-- Preload critical resources -->
+    <link rel="stylesheet" href="./src/style.css" />
+    <link rel="stylesheet" href="./src/backup.css" />
+
+    <!-- Three.js CDN imports -->
+    <script src="https://cdn.jsdelivr.net/npm/three@latest/build/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@latest/examples/js/controls/OrbitControls.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@latest/examples/js/controls/PointerLockControls.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@latest/examples/js/loaders/DRACOLoader.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@latest/examples/js/loaders/GLTFLoader.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@latest/examples/js/utils/SkeletonUtils.js"></script>
+    <script src=" https://cdn.jsdelivr.net/npm/cannon@0.6.2/build/cannon.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@latest/examples/js/utils/BufferGeometryUtils.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/stats-js@1.0.1/build/stats.min.js"></script>
+  </head>
+  <body>
+    <div id="app-container">
+      <!-- Game canvas will be inserted here -->
+      <div id="install-prompt" class="install-prompt">
+        <button id="install-btn" class="install-btns">Install Game</button>
+      </div>
+      <div id="orientation-warning" class="orientation-warning">
+        <p>Please rotate your device to landscape mode</p>
+        <button class="install-btns">Install Game</button>
+      </div>
+    </div>
+
+    <!-- <script type="module" src="script.js"></script> -->
+    <script type="module" src="/src/main.js"></script>
+    <script>
+      // Register service worker
+      if ("serviceWorker" in navigator) {
+        window.addEventListener("load", () => {
+          navigator.serviceWorker
+            .register("/sw.js", {
+              scope: "/",
+              type: "module", // If using ES modules
+            })
+            .then((registration) => {
+              console.log("ServiceWorker registration successful");
+            })
+            .catch((err) => {
+              console.log("ServiceWorker registration failed: ", err);
+            });
+        });
+      }
+
+      // Handle install prompt
+      let deferredPrompt = null; // Initialize as null
+
+      window.addEventListener("beforeinstallprompt", (e) => {
+        e.preventDefault();
+        deferredPrompt = e;
+        document.getElementById("install-prompt").style.display = "block";
+      });
+
+      function showInstallPrompt() {
+        if (deferredPrompt) {
+          deferredPrompt.prompt();
+          deferredPrompt.userChoice.then((choiceResult) => {
+            if (choiceResult.outcome === "accepted") {
+              console.log("User accepted install");
+            }
+            deferredPrompt = null;
+          });
+        }
+        document.getElementById("install-prompt").style.display = "none";
+      }
+
+      document
+        .getElementById("install-btn")
+        .addEventListener("click", showInstallPrompt);
+      document.querySelectorAll(".install-btns").forEach((btn) => {
+        btn.addEventListener("click", (e) => {
+          e.preventDefault();
+          showInstallPrompt();
+        });
+      });
+    </script>
+  </body>
+</html>

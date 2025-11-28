@@ -1,0 +1,11 @@
+[package]
+name = "game_nft"
+version = "0.0.1"
+authors = ["victor"]
+edition = "2024"
+
+[addresses]
+sui = "0x2"
+game_nft = "0x0"
+
+[dependencies]

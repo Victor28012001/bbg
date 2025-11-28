@@ -1,0 +1,1388 @@
+@font-face {
+  font-family: "Robus-BWqOd";
+  src: url("../assets/fonts/Robus-BWqOd.otf") format("opentype");
+}
+@font-face {
+  font-family: "Audiowide-Regular";
+  src: url("../assets/fonts/Audiowide-Regular.ttf") format("opentype");
+}
+@font-face {
+  font-family: "BungeeTint-Regular";
+  src: url("../assets/fonts/BungeeTint-Regular.ttf") format("opentype");
+}
+@font-face {
+  font-family: "Segment7";
+  src: url("../assets/fonts/7segment.woff") format("woff");
+  font-weight: normal;
+  font-style: italic;
+}
+@font-face {
+  font-family: "Zombie";
+  src: url("../assets/fonts/Unquiet Spirits.ttf") format("opentype");
+  /* font-weight: normal;
+  font-style: italic; */
+}
+@font-face {
+  font-family: "Holocaust";
+  src: url("../assets/fonts/ZombieHolocaust-0aL4.ttf") format("opentype");
+}
+
+body {
+  margin: 0;
+  background-color: #000;
+}
+
+/* canvas {
+    display: block;
+  } */
+
+canvas {
+  pointer-events: none;
+  display: none;
+}
+
+#blocker {
+  position: fixed;
+  width: 65%;
+  height: 65%;
+  background: url(../assets/images/hud3.png) no-repeat center center;
+  background-size: contain;
+  z-index: 9999;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+#instructions {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+}
+
+#playButton {
+  font-family: "BungeeTint-Regular";
+  font-size: 5vw;
+  color: white;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.75);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  white-space: nowrap;
+  padding: 14px 48px;
+  border-radius: 12px;
+}
+
+#playButton > h1 {
+  font-family: "BungeeTint-Regular";
+  font-size: 95%;
+  color: rgb(255, 255, 255);
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.75);
+  white-space: nowrap;
+  text-align: center;
+  /* padding: 18px 12px; */
+  cursor: pointer;
+  margin: 0;
+}
+
+#blood-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: url("../assets/images/blood_splash.png") center/cover;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease-out;
+  z-index: 9999;
+}
+
+p {
+  font-family: Arial;
+  font-size: medium;
+  text-align: center;
+}
+
+@media (max-width: 900px) {
+  /* Styles for mobile devices with a maximum width of 767px */
+  #playButton {
+    font-family: "BungeeTint-Regular";
+    /* font-size: 15vw; */
+  }
+
+  p {
+    font-size: xx-small;
+  }
+
+  #splashScreen h1 {
+    font-size: 0.5em;
+    margin-bottom: 0;
+    color: rgb(253, 0, 0);
+  }
+}
+
+@media (min-width: 900px) {
+  #splashScreen h1 {
+    font-size: 8rem;
+    margin-bottom: 0;
+    color: rgb(253, 0, 0);
+  }
+
+  .game-title {
+    font-size: 64px;
+    margin-bottom: 40px;
+    text-shadow: 2px 2px 8px black;
+    font-family: "Zombie";
+  }
+
+  .main-buttons .menu-button button {
+    padding: 7px 15px;
+    font-size: 16px;
+    background-color: #111;
+    color: white;
+    border: 1px solid white;
+    cursor: pointer;
+    transition: background 0.3s, transform 0.2s;
+    margin: 10px 0;
+  }
+
+  #cutscene-text {
+    font-size: small;
+  }
+  #cutscene-portrait {
+    width: 80px;
+    max-width: 20%;
+  }
+}
+
+.highlight-item {
+  color: gold;
+  font-weight: bold;
+}
+
+.highlight-item-red {
+  color: red;
+  font-weight: bold;
+}
+
+#splashContent {
+  font-family: "Zombie", sans-serif;
+  font-size: 8rem;
+}
+
+#cutscene-portrait {
+  width: 120px;
+  margin-bottom: 20px;
+  display: block;
+  object-fit: cover;
+  max-width: 30%;
+  border-radius: 50%;
+  border: 12px solid white;
+  aspect-ratio: 1 / 1;
+}
+
+#cutscene-text {
+  max-width: 70%;
+  background: rgba(0, 0, 0, 0.6);
+  padding: 20px;
+  border-radius: 8px;
+  text-align: center;
+  user-select: none;
+  font-size: large;
+}
+
+/* 🌟 Fullscreen Splash Screen */
+#splashScreen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: url("../assets/images/splash_screen.png");
+  background-size: cover; /* Ensures the image covers the entire screen */
+  background-position: center; /* Centers the image */
+  background-repeat: no-repeat; /* Prevents repeating */
+  color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 999;
+  opacity: 1;
+  transition: opacity 1s ease-out;
+  font-family: "Audiowide-Regular";
+  font-size: 45px;
+}
+
+/* 📊 Loading Bar */
+#loadingBarContainer {
+  width: 35%;
+  height: 1%;
+  background: gray;
+  margin-top: 10px;
+  overflow: hidden;
+  border-radius: 12px;
+  border: 2px solid white;
+}
+#loadingProgress {
+  width: 0%;
+  height: 100%;
+  background: rgb(255, 0, 0);
+}
+
+#loadingButton {
+  margin-top: 20px;
+  font-family: "Zombie";
+  color: red;
+  border: none;
+  font-size: large;
+  background: none;
+}
+#player-hud {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  width: 20%;
+  height: 10%;
+  aspect-ratio: 2 / 1;
+  background: url(../assets/images/hud2.png) no-repeat center center;
+  background-size: contain;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-family: "Audiowide-Regular", sans-serif;
+  color: white;
+  font-size: 14px;
+}
+
+#player-health-bar {
+  width: 50%;
+  height: 50%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+#player-health-bar p {
+  margin: 0;
+  font-weight: bold;
+  text-transform: uppercase;
+  font-size: 60%;
+  letter-spacing: 1px;
+  color: azure;
+  margin-bottom: 4px;
+  font-family: "Audiowide-Regular", Courier, monospace;
+}
+
+#player-health {
+  width: 100%;
+  height: 8px;
+  max-height: 20%;
+  background: linear-gradient(90deg, #ff0000, #ff6600);
+  border-radius: 6px;
+  transition: width 0.3s ease-in-out;
+  position: relative;
+}
+
+#player-health > img {
+  height: 25px;
+  width: 25px;
+  position: absolute;
+  bottom: -160%;
+  left: -12%;
+}
+
+#ammoHUD > p {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-family: "Audiowide-Regular", Courier, monospace;
+  margin: 0;
+}
+
+#ammoHUD > p > img {
+  height: auto;
+  width: 25px;
+}
+
+#ammoHUD {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  font-size: 24px;
+  color: white;
+  font-family: Arial, sans-serif;
+  background: url(../assets/images/hud2.png) no-repeat center center;
+  background-size: contain;
+  border-radius: 5px;
+  height: 10%;
+  aspect-ratio: 2 / 1;
+  width: 20%;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Spider HUD */
+#spider-hud {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  padding: 15px 15px;
+  background: url(../assets/images/hud2.png) no-repeat center center;
+  background-size: cover;
+  color: white;
+  font-size: 12px;
+  font-family: "Audiowide-Regular", sans-serif;
+  text-align: center;
+  height: 44px;
+  display: none;
+}
+
+#spider-hud p {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2px;
+  margin: 0;
+  margin-top: 6px;
+  font-family: "Audiowide-Regular", Courier, monospace;
+}
+
+/* Game Over Popup */
+#game-over-popup,
+#time-expired-popup,
+#game-won-popup {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 500px;
+  padding: 60px;
+  background: url(../assets/images/hud3.png) no-repeat center center;
+  background-size: cover;
+  color: white;
+  text-align: center;
+  height: 240px;
+  /* display: none; */
+  font-family: "Audiowide-Regular", Courier, monospace;
+}
+
+#game-over-popup h2,
+#time-expired-popup h2 {
+  margin-top: 6%;
+  margin-top: 10%;
+  color: #631c80;
+  font-family: "Audiowide-Regular", Courier, monospace;
+}
+
+#game-over-popup button,
+#time-expired-popup button {
+  padding: 10px 15px;
+  border: none;
+  background: #0382a1;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: background 0.3s;
+  margin-top: 6%;
+}
+
+#game-over-popup button:hover {
+  background: #cc0000;
+}
+
+body {
+  margin: 0;
+  overflow: hidden;
+  font-family: sans-serif;
+}
+
+#ui,
+.menu {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 1);
+  color: white;
+  z-index: 99999;
+}
+
+.splash {
+  position: absolute;
+  background: url("../assets/images/splash.png") no-repeat center center;
+  background-size: cover;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  z-index: 99999;
+}
+.hidden {
+  display: none !important;
+}
+.splash button {
+  margin: 10px;
+  padding: 10px 40px;
+  cursor: pointer;
+  background-color: aquamarine;
+  position: absolute;
+  bottom: 20%;
+  font-family: "Audiowide-Regular", Courier, monospace;
+  font-size: 1.5em;
+  font-style: italic;
+}
+button {
+  margin: 10px;
+  padding: 10px 20px;
+  cursor: pointer;
+}
+.body {
+  width: 100vw;
+  height: 70vh;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: end;
+}
+.level-card {
+  width: 30%;
+  /* height: 100%; */
+}
+.card {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  padding: 0 36px;
+  perspective: 2500px;
+  /* margin: 0 15px;*/
+}
+
+.cover-image {
+  width: 50%;
+  height: 50%;
+  object-fit: cover;
+}
+
+.wrapper {
+  transition: all 0.5s;
+  position: absolute;
+  width: 100%;
+  z-index: -1;
+  display: flex;
+  justify-content: center;
+}
+
+.card:hover .wrapper {
+  transform: perspective(900px) translateY(-5%) rotateX(25deg) translateZ(0);
+  box-shadow: 2px 35px 32px -8px rgba(0, 0, 0, 0.75);
+  -webkit-box-shadow: 2px 35px 32px -8px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: 2px 35px 32px -8px rgba(0, 0, 0, 0.75);
+}
+
+.wrapper::before,
+.wrapper::after {
+  content: "";
+  opacity: 0;
+  width: 100%;
+  height: 80px;
+  transition: all 0.5s;
+  position: absolute;
+  left: 0;
+}
+.wrapper::before {
+  top: 0;
+  height: 100%;
+  background-image: linear-gradient(
+    to top,
+    transparent 46%,
+    rgba(12, 13, 19, 0.5) 68%,
+    rgba(12, 13, 19) 97%
+  );
+}
+.wrapper::after {
+  bottom: 0;
+  opacity: 1;
+  background-image: linear-gradient(
+    to bottom,
+    transparent 46%,
+    rgba(12, 13, 19, 0.5) 68%,
+    rgba(12, 13, 19) 97%
+  );
+}
+
+.card:hover .wrapper::before,
+.wrapper::after {
+  opacity: 1;
+}
+
+.card:hover .wrapper::after {
+  height: 120px;
+}
+.title {
+  width: 100%;
+  transition: transform 0.5s;
+  text-align: center;
+}
+.card:hover .title {
+  transform: translate3d(0%, -50px, 100px);
+}
+
+.level-name {
+  font-family: "Holocaust", sans-serif;
+  font-size: 36px;
+  text-align: center;
+  color: red;
+  letter-spacing: 2px;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.75);
+}
+
+.level-location {
+  font-family: sans-serif;
+  font-size: 12px;
+  text-align: center;
+  color: rgb(2, 141, 2);
+}
+
+.character {
+  /* width: 100%; */
+  opacity: 0;
+  transition: all 0.5s;
+  position: absolute;
+  z-index: -1;
+}
+
+.card:hover .character {
+  opacity: 1;
+  transform: translate3d(0%, -30%, 100px);
+}
+
+#levelButtons {
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: left;
+  align-items: center;
+  padding-left: 12px;
+  height: 90%;
+  overflow-x: auto;
+  gap: 12px;
+  width: auto;
+
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+#levelButtons::-webkit-scrollbar {
+  display: none;
+}
+.disabled-card {
+  pointer-events: none;
+  opacity: 0.4;
+  filter: grayscale(100%);
+}
+
+@keyframes flashlightPulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.15);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.tooltip {
+  position: fixed;
+  bottom: 80px;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 8px 12px;
+  background: rgba(0, 0, 0, 0.7);
+  color: white;
+  border-radius: 5px;
+  font-size: 14px;
+  pointer-events: none;
+  z-index: 1000;
+}
+
+.door-tooltip {
+  position: absolute;
+  color: white;
+  background-color: rgba(0, 0, 0, 0.7);
+  padding: 5px 10px;
+  border-radius: 5px;
+  display: none;
+  z-index: 1000;
+  transform: translateX(-50%);
+  font-family: Arial, sans-serif;
+  pointer-events: none;
+}
+
+.main-menu-container {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  font-family: "Arial", sans-serif;
+}
+
+#menu-bg-video {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  top: 0;
+  left: 0;
+  z-index: -1;
+}
+
+.main-menu-overlay {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  background: rgba(0, 0, 0, 0.5);
+}
+
+.game-title {
+  font-size: 24px;
+  margin-bottom: 40px;
+  text-shadow: 2px 2px 8px black;
+  font-family: "Zombie";
+}
+
+.main-buttons {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+.menu-button {
+  display: flex;
+  align-items: center;
+  position: relative; /* Needed for absolute positioning to work properly */
+  overflow: hidden;
+}
+
+.main-buttons .menu-button button {
+  padding: 7px 15px;
+  font-size: 16px;
+  background-color: #111;
+  color: white;
+  border: 1px solid white;
+  cursor: pointer;
+  transition: background 0.3s, transform 0.2s;
+  margin: 25px 0 0;
+  margin-left: -15px;
+  margin-right: -15px;
+}
+
+.main-buttons .menu-button button:hover {
+  background-color: #333;
+  transform: scale(1.05);
+}
+
+.hand-container {
+  position: relative;
+  width: 60px;
+  height: 50px;
+}
+
+.hand-svg {
+  position: absolute;
+  bottom: -35%;
+  left: 0;
+  transition: transform 0.3s ease;
+}
+
+.menu-action-button {
+  padding: 7px 15px;
+  font-size: 16px;
+  background-color: #111;
+  color: white;
+  border: 1px solid white;
+  cursor: pointer;
+  margin: 10px 0;
+  margin-left: -15px;
+  margin-right: -15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  height: 36px;
+  width: 150px;
+  overflow: visible; /* Let the image overflow */
+  z-index: 1;
+  transform-origin: center;
+  transition: background 1.3s, transform 1.2s, width 1.2s ease;
+}
+
+.menu-action-button.expanding {
+  width: 180px;
+}
+
+.button-text {
+  z-index: 1;
+  transition: opacity 0.3s ease;
+  font-size: small;
+}
+
+.button-text.hidden {
+  opacity: 0;
+}
+
+/* Sliding image inside button */
+.button-img {
+  position: absolute;
+  top: 100%; /* Start completely below */
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100px;
+  height: auto;
+  transition: top 1.2s ease;
+  z-index: 2;
+  pointer-events: none;
+}
+
+/* Slides image up inside the wrapper (from bottom to top) */
+.button-img.show {
+  top: -27px;
+}
+
+.keypad-modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: black;
+  padding: 20px;
+  border: 2px solid green;
+  border-radius: 10px;
+  z-index: 1000;
+}
+.inputCont {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  align-items: center;
+}
+.modal-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+}
+.status-light {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background-color: grey;
+  margin-bottom: 10px;
+}
+.code-input {
+  width: 40px;
+  height: 60px;
+  font-size: 32px;
+  text-align: center;
+  background: black;
+  color: green;
+  border: 2px solid green;
+  border-radius: 5px;
+  font-family: "Segment7", monospace;
+}
+.submit-btn {
+  padding: 8px 20px;
+  background: black;
+  color: green;
+  border: 2px solid green;
+  border-radius: 5px;
+  cursor: pointer;
+  font-family: "Segment7", monospace;
+}
+
+/* Add this to your main CSS file */
+.pauseMenu {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(5px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+  font-family: "Arial", sans-serif;
+  touch-action: manipulation;
+}
+
+.pause-menu {
+  background: linear-gradient(145deg, #1a1a2e, #16213e);
+  border-radius: 15px;
+  padding: 2rem 3rem;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+  border: 2px solid rgba(255, 255, 255, 0.1);
+  text-align: center;
+  max-width: 400px;
+  width: 90%;
+  animation: fadeIn 0.3s ease-out;
+}
+
+.pause-menu h2 {
+  color: #fff;
+  font-size: 2.5rem;
+  margin-bottom: 2rem;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+  letter-spacing: 2px;
+}
+
+.pause-menu button {
+  display: block;
+  width: 100%;
+  padding: 15px 20px;
+  margin: 10px 0;
+  background: linear-gradient(to right, #4e54c8, #8f94fb);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 1.2rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  cursor: pointer;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+  transition: background-color 0.2s;
+}
+
+.pause-menu button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+  background: linear-gradient(to right, #8f94fb, #4e54c8);
+}
+
+.pause-menu button:active {
+  transform: translateY(1px);
+}
+
+.pause-menu button#resume-button {
+  background: linear-gradient(to right, #00b09b, #96c93d);
+}
+
+.pause-menu button#resume-button:hover {
+  background: linear-gradient(to right, #96c93d, #00b09b);
+}
+
+.pause-menu button#restart-button {
+  background: linear-gradient(to right, #f46b45, #eea849);
+}
+
+.pause-menu button#restart-button:hover {
+  background: linear-gradient(to right, #eea849, #f46b45);
+}
+
+.pause-menu button#main-menu-button {
+  background: linear-gradient(to right, #ff416c, #ff4b2b);
+}
+
+.pause-menu button#main-menu-button:hover {
+  background: linear-gradient(to right, #ff4b2b, #ff416c);
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Responsive adjustments */
+@media (max-width: 1024px) {
+  .pause-menu {
+    padding: 1.5rem;
+  }
+
+  .pause-menu h2 {
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .pause-menu button {
+    padding: 12px 15px;
+    font-size: 1rem;
+  }
+}
+
+body {
+  margin: 0;
+  overflow: hidden;
+  position: fixed;
+  width: 100%;
+  height: 100%;
+}
+
+@media (max-width: 880px) {
+  #battery-container {
+    position: absolute;
+    bottom: -13px;
+    left: 10px;
+    width: 80%;
+    height: 5px;
+    background: #222;
+    border: 1px solid #fff;
+    display: flex;
+  }
+
+  .energy-bar-container {
+    position: relative;
+    width: 100%;
+    height: 5px;
+    background: rgba(0, 0, 0, 0.5);
+    border: 1px solid #333;
+  }
+
+  #energy-container {
+    position: absolute;
+    bottom: -27px;
+    left: 28px;
+    width: 130px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row-reverse;
+  }
+
+  .hud-label > img {
+    width: 16px;
+    height: 16px;
+  }
+
+  #flashlight-indicator {
+    width: 16px;
+    height: 16px;
+  }
+
+  #timer-hud {
+    position: absolute;
+    left: 50%;
+    top: 10%;
+    font-family: "Segment7", monospace;
+  }
+}
+
+/* Desktop */
+@media (min-width: 900px) {
+  #battery-container {
+    position: absolute;
+    bottom: 0;
+    left: 10px;
+    width: 80%;
+    height: 8px;
+    background: #222;
+    border: 1px solid #fff;
+    display: flex;
+  }
+
+  .energy-bar-container {
+    position: relative;
+    width: 100%;
+    height: 10px;
+    background: rgba(0, 0, 0, 0.5);
+    border: 1px solid #333;
+  }
+
+  #energy-container {
+    position: absolute;
+    bottom: -20px;
+    left: 30px;
+    width: 80%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row-reverse;
+  }
+
+  .hud-label > img {
+    width: 20px;
+    height: 20px;
+  }
+
+  #flashlight-indicator {
+    width: 20px;
+    height: 20px;
+  }
+
+  #timer-hud {
+    position: absolute;
+    left: 50%;
+    top: 5%;
+    font-family: "Segment7", monospace;
+  }
+
+  #loadingButton {
+    margin-top: 20px;
+    font-family: "Zombie";
+    color: red;
+    border: none;
+    font-size: xx-large;
+    background: none;
+  }
+}
+
+.energy-bar {
+  height: 100%;
+  width: 100%;
+  background-color: #55ff55;
+  transition: width 0.1s ease-out, background-color 0.3s;
+  position: relative;
+  z-index: 2;
+}
+
+.buildup-bar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 0%;
+  background-color: rgba(255, 255, 0, 0.3);
+  z-index: 1;
+  transition: width 0.1s ease-out;
+}
+
+.hud-label {
+  background-color: white;
+  border-radius: 50%;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Mobile controls */
+
+#mobile-action-buttons {
+  position: absolute;
+  left: 50%;
+  top: 80%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: row-reverse;
+  pointer-events: auto;
+  justify-content: space-between;
+  height: fit-content;
+  width: 55%;
+}
+
+.mobile-action-btn {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  font-weight: bold;
+  font-size: 20px;
+  border: 2px solid rgba(255, 255, 255, 0.5);
+  cursor: pointer;
+}
+
+.mobile-action-btn:active {
+  transform: scale(0.95);
+  opacity: 0.8;
+}
+
+#mobile-door-btn {
+  position: fixed;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  bottom: 70%;
+  right: 0;
+  transform: translateY(-60%);
+  color: white;
+  font-weight: bold;
+  font-size: 12px;
+  user-select: none;
+  cursor: pointer;
+  touch-action: manipulation;
+
+  /* Additional recommended mobile styles */
+  -webkit-tap-highlight-color: transparent;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  transition: transform 0.1s, background-color 0.2s;
+}
+
+#mobile-door-btn:active {
+  transform: scale(0.95);
+  opacity: 0.8;
+}
+
+#game-ui {
+  pointer-events: none; /* Let children handle events */
+}
+
+#game-ui > * {
+  pointer-events: auto;
+}
+
+.canvas-blocker {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 9998;
+  cursor: default;
+  touch-action: none;
+}
+
+.video-play-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 5em;
+  color: white;
+  background: rgba(0, 0, 0, 0.5);
+  cursor: pointer;
+  z-index: 10;
+}
+
+/* Existing menu button styles */
+.menu-action-button {
+  /* Your existing button styles */
+  touch-action: manipulation; /* Improves touch responsiveness */
+  -webkit-tap-highlight-color: transparent; /* Removes tap highlight on iOS */
+}
+
+.main-menu-container button {
+  user-select: none; /* Prevent text selection on mobile */
+}
+
+/* PWA-specific styles */
+.install-prompt {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: rgba(0, 0, 0, 0.8);
+  color: white;
+  padding: 10px;
+  border-radius: 5px;
+  display: none;
+  z-index: 1000;
+}
+
+#install-btn,
+.install-btns {
+  background: #4caf50;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.orientation-warning {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.9);
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 24px;
+  z-index: 9999;
+  display: none;
+}
+
+@media (orientation: portrait) {
+  .orientation-warning {
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+/* Ensure canvas fills the screen */
+/* canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+  outline: none;
+} */
+
+.hud-weapon {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  color: white;
+  font-family: "Arial", sans-serif;
+  font-size: 24px;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+  z-index: 100;
+}
+
+.drawer-tooltip {
+  background: rgba(0, 0, 0, 0.7);
+  color: white;
+  padding: 10px 20px;
+  border-radius: 5px;
+  font-family: Arial, sans-serif;
+  pointer-events: none;
+  transition: opacity 0.3s;
+}
+
+/* Mobile button styles */
+#mobile-drawer-btn {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  padding: 15px 25px;
+  background: rgba(0, 0, 0, 0.7);
+  color: white;
+  border: 2px solid white;
+  border-radius: 50%;
+  font-size: 16px;
+  z-index: 1000;
+  display: none;
+}
+
+.inventory-ui {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(0, 0, 0, 0.7);
+  border: 2px solid #444;
+  border-radius: 5px;
+  padding: 10px;
+  display: none;
+  z-index: 100;
+}
+
+.inventory-title {
+  color: white;
+  text-align: center;
+  margin-bottom: 10px;
+  font-weight: bold;
+}
+
+.inventory-slots {
+  display: flex;
+  gap: 10px;
+}
+
+.inventory-slot {
+  width: 60px;
+  height: 60px;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid #444;
+  border-radius: 3px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.item-icon {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.item-icon img {
+  width: 40px;
+  height: 40px;
+}
+
+.item-name {
+  font-size: 10px;
+  color: white;
+  text-align: center;
+  margin-top: 2px;
+}
+
+.context-menu {
+  position: fixed;
+  background: rgba(0, 0, 0, 0.9);
+  border: 1px solid #444;
+  border-radius: 3px;
+  z-index: 200;
+}
+
+.context-options {
+  display: flex;
+  flex-direction: row;
+}
+
+.context-options button {
+  background: none;
+  border: none;
+  color: white;
+  padding: 8px 15px;
+  text-align: left;
+  cursor: pointer;
+}
+
+.context-options button:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+#timer-hud {
+  position: absolute;
+  left: 50%;
+  top: 10%;
+  font-family: "Segment7", monospace;
+}

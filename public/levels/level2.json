@@ -1,0 +1,17 @@
+{
+  "name": "Lost Way - Basement/Morgue",
+  "description": "Find first elevator code fragment",
+  "objects": [
+    [-10, 0, 0], [-8, 0, 0], [-6, 0, 0], [-6, 0, -2], [-6, 0, -4],
+    [-4, 0, -4], [-2, 0, -4], [-2, 0, -6], [0, 0, -6], [2, 0, -6],
+    [2, 0, -8], [4, 0, -8], [4, 0, -10], [6, 0, -10], [6, 0, -8],
+    [8, 0, -8], [10, 0, -8]
+  ],
+  "target": [10, 0, -8],
+  "metadata": {
+    "startRoom": [-10, 0, 0],
+    "theme": "morgue",
+    "mapDensity": "low",
+    "puzzleType": "codeFragment"
+  }
+}

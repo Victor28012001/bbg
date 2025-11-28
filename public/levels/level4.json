@@ -1,0 +1,16 @@
+{
+  "name": "Reunion - Security & Surgery",
+  "description": "Find shotgun in security room, calendar code",
+  "objects": [
+    [-6, 0, -6], [-4, 0, -6], [-2, 0, -6], [0, 0, -6], [2, 0, -6],
+    [-4, 0, -4], [0, 0, -4], [4, 0, -4], [-6, 0, -2], [0, 0, -2], [6, 0, -2],
+    [-2, 0, 0], [0, 0, 0], [2, 0, 0], [0, 0, 2]
+  ],
+  "target": [0, 0, 2],
+  "metadata": {
+    "startRoom": [-6, 0, -6],
+    "securityRoom": [0, 0, -4],
+    "shotgunAvailable": true,
+    "hasCalendarCode": true
+  }
+}

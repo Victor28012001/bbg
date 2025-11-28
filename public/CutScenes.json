@@ -1,0 +1,251 @@
+[
+  {
+    "id": "introCutscene",
+    "background": "./assets/images/centralized_platform_hall.jpg",
+    "dialogue": [
+      {
+        "text": "In a world where gamers have no real ownership...",
+        "portrait": "./assets/images/player.jpg",
+        "background": "./assets/images/centralized_platform_hall.jpg",
+        "voice": "./assets/audio/intro1.mp3",
+        "musicCue": "./assets/audio/ominous_intro_music.mp3"
+      },
+      {
+        "text": "Characters. Skins. Assets. All rented, all revoked at a whim.",
+        "portrait": "./assets/images/player.jpg",
+        "background": "./assets/images/centralized_platform_hall.jpg",
+        "voice": "./assets/audio/intro2.mp3"
+      },
+      {
+        "text": "But not anymore. I’m going to the top. Eight floors. Eight streamers. Then I reclaim what’s mine.",
+        "portrait": "./assets/images/player.jpg",
+        "background": "./assets/images/centralized_platform_hall.jpg",
+        "voice": "./assets/audio/intro3.mp3"
+      }
+    ],
+    "nextScene": "level-0"
+  },
+  {
+    "id": "cutscene0",
+    "background": "./assets/images/level1_streamer_room.jpg",
+    "dialogue": [
+      {
+        "text": "The Vlogger — obsessed with vanity. She sold her soul for skins.",
+        "portrait": "./assets/images/vlogger.jpg",
+        "background": "./assets/images/level1_streamer_room.jpg",
+        "voice": "./sounds/level-voiceovers/Mic1.mp3",
+        "musicCue": "./sounds/level-ambience/1-01 Encounter.mp3"
+      },
+      {
+        "text": "She lives in a shrine of mirrors. She sees only herself... and the loot.",
+        "portrait": "./assets/images/player.jpg",
+        "background": "./assets/images/level1_streamer_room.jpg",
+        "voice": "./sounds/level-voiceovers/Mic2.mp3"
+      },
+      {
+        "text": "I need the elevator code. It's hidden behind the mask she never removes.",
+        "portrait": "./assets/images/player.jpg",
+        "background": "./assets/images/level1_streamer_room.jpg",
+        "voice": "./sounds/level-voiceovers/Mic3.mp3"
+      }
+    ],
+    "nextScene": "level-0"
+  },
+  {
+    "id": "cutscene1",
+    "background": "./assets/images/level2_streamer_room.jpg",
+    "dialogue": [
+      {
+        "text": "The Speedrunner — glitched his soul chasing milliseconds.",
+        "portrait": "./assets/images/speedrunner.png",
+        "background": "./assets/images/level2_streamer_room.jpg",
+        "voice": "./assets/audio/level2_1.mp3",
+        "musicCue": "./assets/audio/glitch_loop.mp3"
+      },
+      {
+        "text": "He repeats time itself. Dying to beat his own ghost.",
+        "portrait": "./assets/images/player.png",
+        "background": "./assets/images/level2_streamer_room.jpg",
+        "voice": "./assets/audio/level2_2.mp3"
+      },
+      {
+        "text": "To beat him, I need to slow down… and see the pattern in the loop.",
+        "portrait": "./assets/images/player.png",
+        "background": "./assets/images/level2_streamer_room.jpg",
+        "voice": "./assets/audio/level2_3.mp3"
+      }
+    ],
+    "nextScene": "level-1"
+  },
+  {
+    "id": "cutscene2",
+    "background": "./assets/images/level3_streamer_room.jpg",
+    "dialogue": [
+      {
+        "text": "The Modder — once a creator, now warped by infinite power.",
+        "portrait": "./assets/images/modder.png",
+        "background": "./assets/images/level3_streamer_room.jpg",
+        "voice": "./assets/audio/level3_1.mp3",
+        "musicCue": "./assets/audio/techno_corruption.mp3"
+      },
+      {
+        "text": "He reshaped reality. Traps appear where logic ends.",
+        "portrait": "./assets/images/player.png",
+        "background": "./assets/images/level3_streamer_room.jpg",
+        "voice": "./assets/audio/level3_2.mp3"
+      },
+      {
+        "text": "His code hides the path forward — I just need to read it right.",
+        "portrait": "./assets/images/player.png",
+        "background": "./assets/images/level3_streamer_room.jpg",
+        "voice": "./assets/audio/level3_3.mp3"
+      }
+    ],
+    "nextScene": "level-2"
+  },
+  {
+    "id": "cutscene3",
+    "background": "./assets/images/level4_streamer_room.jpg",
+    "dialogue": [
+      {
+        "text": "The Lootbox King — feeding on randomness. He turned gambling into a game.",
+        "portrait": "./assets/images/lootboxking.png",
+        "background": "./assets/images/level4_streamer_room.jpg",
+        "voice": "./assets/audio/level4_1.mp3",
+        "musicCue": "./assets/audio/slot_machine_theme.mp3"
+      },
+      {
+        "text": "The elevator code is locked behind fake chances and paid spins.",
+        "portrait": "./assets/images/player.png",
+        "background": "./assets/images/level4_streamer_room.jpg",
+        "voice": "./assets/audio/level4_2.mp3"
+      }
+    ],
+    "nextScene": "level-3"
+  },
+  {
+    "id": "cutscene4",
+    "background": "./assets/images/level5_streamer_room.jpg",
+    "dialogue": [
+      {
+        "text": "The Event Host — every room here is a mini-event, rigged and looped.",
+        "portrait": "./assets/images/eventhost.png",
+        "background": "./assets/images/level5_streamer_room.jpg",
+        "voice": "./assets/audio/level5_1.mp3",
+        "musicCue": "./assets/audio/cheering_crowd_fades_out.mp3"
+      },
+      {
+        "text": "He speaks in ads. He offers rewards, but takes control.",
+        "portrait": "./assets/images/player.png",
+        "background": "./assets/images/level5_streamer_room.jpg",
+        "voice": "./assets/audio/level5_2.mp3"
+      }
+    ],
+    "nextScene": "level-4"
+  },
+  {
+    "id": "cutscene5",
+    "background": "./assets/images/level6_streamer_room.jpg",
+    "dialogue": [
+      {
+        "text": "The Influencer — master of illusion, blending truth and sponsored lies.",
+        "portrait": "./assets/images/influencer.png",
+        "background": "./assets/images/level6_streamer_room.jpg",
+        "voice": "./assets/audio/level6_1.mp3",
+        "musicCue": "./assets/audio/static_filter.mp3"
+      },
+      {
+        "text": "She lures you in with charm… then twists the narrative.",
+        "portrait": "./assets/images/player.png",
+        "background": "./assets/images/level6_streamer_room.jpg",
+        "voice": "./assets/audio/level6_2.mp3"
+      }
+    ],
+    "nextScene": "level-5"
+  },
+  {
+    "id": "cutscene6",
+    "background": "./assets/images/level7_streamer_room.jpg",
+    "dialogue": [
+      {
+        "text": "The Collector — hoards all rare items behind massive paywalls.",
+        "portrait": "./assets/images/collector.png",
+        "background": "./assets/images/level7_streamer_room.jpg",
+        "voice": "./assets/audio/level7_1.mp3",
+        "musicCue": "./assets/audio/museum_of_greed.mp3"
+      },
+      {
+        "text": "He has my tokens. My original avatar. My digital soul.",
+        "portrait": "./assets/images/player.png",
+        "background": "./assets/images/level7_streamer_room.jpg",
+        "voice": "./assets/audio/level7_2.mp3"
+      }
+    ],
+    "nextScene": "level-6"
+  },
+  {
+    "id": "cutscene7",
+    "background": "./assets/images/level8_streamer_room.jpg",
+    "dialogue": [
+      {
+        "text": "The CEO — the final boss. He built the tower. He sells identity like a product.",
+        "portrait": "./assets/images/ceo.png",
+        "background": "./assets/images/level8_streamer_room.jpg",
+        "voice": "./assets/audio/level8_1.mp3",
+        "musicCue": "./assets/audio/final_battle_theme.mp3"
+      },
+      {
+        "text": "He calls it business. I call it theft.",
+        "portrait": "./assets/images/player.png",
+        "background": "./assets/images/level8_streamer_room.jpg",
+        "voice": "./assets/audio/level8_2.mp3"
+      },
+      {
+        "text": "Time to end this.",
+        "portrait": "./assets/images/player.png",
+        "background": "./assets/images/level8_streamer_room.jpg",
+        "voice": "./assets/audio/level8_3.mp3"
+      }
+    ],
+    "nextScene": "level-7"
+  },
+  {
+    "id": "outroCutscene",
+    "background": "./assets/images/o-zone.jpg",
+    "dialogue": [
+      {
+        "text": "I made it. The O-Zone.",
+        "portrait": "./assets/images/player.png",
+        "background": "./assets/images/o-zone.jpg",
+        "voice": "./assets/audio/outro1.mp3",
+        "musicCue": "./assets/audio/uplifting_finale.mp3"
+      },
+      {
+        "text": "Here, my identity is mine. My character. My data. My value.",
+        "portrait": "./assets/images/player.png",
+        "background": "./assets/images/o-zone.jpg",
+        "voice": "./assets/audio/outro2.mp3"
+      },
+      {
+        "text": "No more rent. No more middlemen. Just pure play and ownership.",
+        "portrait": "./assets/images/o-zone-symbol.png",
+        "background": "./assets/images/o-zone.jpg",
+        "voice": "./assets/audio/outro3.mp3"
+      }
+    ],
+    "nextScene": "gameComplete"
+  },
+  {
+    "id": "gameComplete",
+    "background": "./assets/images/game_complete.jpg",
+    "dialogue": [
+      {
+        "text": "Congratulations! You have completed the game.",
+        "portrait": "./assets/images/player.png",
+        "background": "./assets/images/game_complete.jpg",
+        "voice": "./assets/audio/game_complete.mp3"
+      }
+    ],
+    "nextScene": null
+  }
+]

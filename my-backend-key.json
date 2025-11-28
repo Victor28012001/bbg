@@ -1,0 +1,7 @@
+{
+  "alias": "my-backend-key",
+  "suiAddress": "0x821e3b7bc02f296fda953b0c5f20e6119e6236bcf08b0c6e773fdcc5a5449bd7",
+  "publicKey": "AHNrcusUD2Id7kaizboWSPwsdJBiGp+MsS6wjCIzSEDi",
+  "privateKey": "suiprivkey1qprx0tk5sdlxhxfur229vfh4hsavzxsweu02a2d2ztdw7kln6kyuqg6wkh8",
+  "scheme": "ed25519"
+}

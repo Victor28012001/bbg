@@ -1,0 +1,39 @@
+{
+    "name": "Bring Back Gladys",
+    "theme_color": "#000000",
+    "background_color": "#000000",
+    "short_name": "BBG",
+    "id": "bbg_vicki",
+    "start_url": "/?fullscreen=true",
+    "scope": "/",
+    "description": "this is a html5 threejs game that has solana integrated for the purpose of user autonomous gaming experience",
+    "orientation": "landscape",
+    "display": "fullscreen",
+    "categories": [
+        "entertainment",
+        "games",
+        "social"
+    ],
+    "icons": [
+        {
+            "src": "/assets/images/icon-192x192.png",
+            "sizes": "192x192",
+            "type": "image/png",
+            "purpose": "any maskable"
+        },
+        {
+            "src": "/assets/images/icon-512x512.png",
+            "sizes": "512x512",
+            "type": "image/png",
+            "purpose": "any maskable"
+        }
+    ],
+    "screenshots": [
+        {
+            "src": "/assets/images/screenshot1.png",
+            "sizes": "1280x720",
+            "type": "image/png",
+            "form_factor": "wide"
+        }
+    ]
+}
